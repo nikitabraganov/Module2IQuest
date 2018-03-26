@@ -12,15 +12,23 @@ namespace ReadPersonalitiesFromCSV
         static void Main(string[] args)
         {
             var Personalities = new PersonalityCollection();
-            string fileName = Path.GetFullPath(Directory.GetCurrentDirectory() + @"\Personalities.txt");
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "\\Personalities.txt");
+            string fileName = Path.GetFullPath(Directory.GetCurrentDirectory() + @"\iQURL_M2_Week1_homework_inputData.csv.xls");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "\\iQURL_M2_Week1_homework_inputData.csv.xls");
             var allLines = File.ReadAllLines(fileName);
             foreach (var line in allLines)
             {
                 var splittedLines = line.Split(separator: ',');
                 if (splittedLines != null && splittedLines.Any())
                 {
-                    Personalities.AddPersonalitiesToCollection(new Personality(splittedLines[0], splittedLines[1], DateTime.Parse(splittedLines[2]), DateTime.Parse(splittedLines[3])));
+                    if (splittedLines.Length > 3)
+                    {
+                        Personalities.AddPersonalitiesToCollection(new Personality(splittedLines[0], splittedLines[1], int.Parse(splittedLines[2]), int.Parse(splittedLines[3])));
+
+                    }
+                    else
+                    {
+                        Personalities.AddPersonalitiesToCollection(new Personality(splittedLines[0], splittedLines[1], int.Parse(splittedLines[2])));
+                    }
                 }
             }
             int NumberOfPersonality = 0;
@@ -28,8 +36,9 @@ namespace ReadPersonalitiesFromCSV
             {
                 Console.Write(++NumberOfPersonality + " " + person.FirstName + " ");
                 Console.Write(person.LastName + " ");
-                Console.Write(person.DateOfBirth.ToString("dd/MM/yyyy") + " ");
-                Console.Write(person.DateOfDeath.ToString("dd/MM/yyyy") + " ");
+                Console.Write(person.DateOfBirth + " ");
+                Console.Write(person.DateOfDeath + " ");
+                Console.WriteLine();
             }
             Console.ReadKey();
         }
