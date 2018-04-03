@@ -26,18 +26,22 @@ namespace CompressFileProject
             using (FileStream inputFileToCompress = fileInfo.OpenRead())
             {
 
-                if ((File.GetAttributes(fileInfo.FullName) & FileAttributes.Hidden) != FileAttributes.Hidden & fileInfo.Extension != ".gz")
+                if (!FilesCompressed(fileInfo))
                 {
                     using (FileStream compressedOutputFile = File.Create(fileInfo.FullName + ".gz"))
                     {
-                        using (GZipStream Compress = new GZipStream(compressedOutputFile, CompressionMode.Compress))
+                        using (GZipStream compress = new GZipStream(compressedOutputFile, CompressionMode.Compress))
                         {
-                            inputFileToCompress.CopyTo(Compress);
-                            Console.WriteLine("Compressed ratio of {0} is {1}%.", fileInfo.Name, fileInfo.Length/compressedOutputFile.Length);
+                            inputFileToCompress.CopyTo(compress);
+                            Console.WriteLine("Compressed ratio of {0} is {1}%.", fileInfo.Name, fileInfo.Length / compressedOutputFile.Length);
                         }
                     }
                 }
             }
+        }
+        public static bool FilesCompressed(FileInfo fileInfo)
+        {
+            return (File.GetAttributes(fileInfo.FullName) & FileAttributes.Hidden) != FileAttributes.Hidden & fileInfo.Extension != ".gz";
         }
     }
 }

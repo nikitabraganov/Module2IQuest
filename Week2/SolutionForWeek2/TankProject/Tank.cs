@@ -8,11 +8,23 @@ namespace TankProject
 {
     public class Tank : IDisposable
     {
+        public Stack<int> ammunition = new Stack<int>();
+
         public string TankModel { get; private set; }
 
         public Tank(string tankModel)
         {
             TankModel = tankModel;
+        }
+
+        public Tank()
+
+        {
+        }
+
+        ~Tank()
+        {
+            Dispose();
         }
 
         public void Dispose()
@@ -25,6 +37,11 @@ namespace TankProject
         {
             if (disposing)
             {
+
+                while (ammunition.Count > 0)
+                {
+                    ammunition.Pop();
+                }
                 TankModel = String.Empty;
             }
             // free native resources if there are any.

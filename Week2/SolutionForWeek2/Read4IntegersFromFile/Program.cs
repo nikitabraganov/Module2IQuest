@@ -11,21 +11,24 @@ namespace Read4IntegersFromFile
     {
         static void Main(string[] args)
         {
-
             Console.WriteLine("Enter integers to be writed in file");
-            int FirstInteger = int.Parse(Console.ReadLine());
-            int SecondInteger = int.Parse(Console.ReadLine());
-            int ThirdInteger = int.Parse(Console.ReadLine());
-            int FourthInteger = int.Parse(Console.ReadLine());
+            int[] integersToWrite = { int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()) };
 
-            StreamWriter writer = File.CreateText("FourIntegers.txt");
-            writer.Write(FirstInteger); writer.Write(SecondInteger); writer.Write(ThirdInteger); writer.Write(FourthInteger);
-            writer.Close();
+            FileStream streamToWriteText;
+            streamToWriteText = new FileStream("FourIntegers.txt", FileMode.Create);
+            byte[] info = new byte[4];
+            for (int firstIndex = 0; firstIndex < 4; firstIndex++)
+            {
+                info[firstIndex] = (byte)integersToWrite[firstIndex];
+            }
 
-            StreamReader reader = File.OpenText("FourIntegers.txt");
-            string contentsOfTheFile = reader.ReadLine();
-            Console.WriteLine("Last 2 numbers are: {0} {1}", contentsOfTheFile[2], contentsOfTheFile[3]);
-            reader.Close();
+            streamToWriteText.Write(info, 0, 4);
+
+            streamToWriteText.Seek(2, SeekOrigin.Begin);
+            Console.WriteLine("The third integer is: {0}", streamToWriteText.ReadByte());
+            streamToWriteText.Seek(3, SeekOrigin.Begin);
+            Console.WriteLine("The fourth integer is: {0}", streamToWriteText.ReadByte());
+            streamToWriteText.Close();
 
             Console.ReadKey();
         }
