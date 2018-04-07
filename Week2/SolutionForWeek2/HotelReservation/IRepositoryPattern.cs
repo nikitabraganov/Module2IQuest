@@ -8,7 +8,9 @@ namespace HotelReservation
 {
     public interface IRepositoryPattern<T> where T : class
     {
-        List<T> ReturnAllCustomers();
+        List<T> GetAll();
+        T GetById(int id);
         void Add(T customerToAdd);
+        void Remove(int id);
     }
 }

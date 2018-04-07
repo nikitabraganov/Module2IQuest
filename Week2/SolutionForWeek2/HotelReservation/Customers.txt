@@ -1,0 +1,5 @@
+﻿1, "NikitaBraganov","12345","str. Petru Maiorescu"
+2, "IoanMarian","12345","str. Petru Titulescu"
+3, "PetruCeaicovski","12345","str. Petru Evanghelescu"
+4, "AlexVaduva","12345","str. Ion Maiorescu"
+5, "MariaOprea","12345","str. Lucian Calarescu"
