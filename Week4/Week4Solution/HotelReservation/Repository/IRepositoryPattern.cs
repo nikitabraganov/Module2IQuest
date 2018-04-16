@@ -13,6 +13,6 @@ namespace HotelReservation
         T GetById(int id);
         void Add(T customerToAdd);
         void Remove(int id);
-        IEnumerable<T> SearchFor(Func<T, bool> predicate);
+        IEnumerable<T> FindBy(Func<T, bool> predicate);
     }
 }

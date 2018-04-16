@@ -119,7 +119,7 @@ namespace HotelReservation
             int customerId;
             if (int.TryParse(Console.ReadLine(), out customerId))
             {
-                var customerToBeRemoved = customerRepository.SearchFor(customerToRemove => customerToRemove.Id == customerId).Single();
+                var customerToBeRemoved = customerRepository.FindBy(customerToRemove => customerToRemove.Id == customerId).Single();
                 customerRepository.Remove(customerToBeRemoved.Id);
             }
             else

@@ -27,15 +27,15 @@ namespace HotelReservation
 
         public T GetById(int id)
         {
-            return Data.Single(itemToFindById => itemToFindById.Id.Equals(id));
+            return Data.FirstOrDefault(itemToFindById => itemToFindById.Id.Equals(id));
         }
 
         public void Remove(int id)
         {
-            Data.Remove(Data.Single(itemToRemoveById => itemToRemoveById.Id.Equals(id)));
+            Data.Remove(Data.FirstOrDefault(itemToRemoveById => itemToRemoveById.Id.Equals(id)));
         }
 
-        public IEnumerable<T> SearchFor(Func<T, bool> predicate)
+        public IEnumerable<T> FindBy(Func<T, bool> predicate)
         {
             return Data.Where(predicate);
         }
