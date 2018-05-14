@@ -19,7 +19,8 @@ namespace Week7
             sw.Start();
             var threads = new List<Thread> { new Thread(FirstPrimeBasic), new Thread(SecondPrimeBasic), new Thread(ThirdPrimeBasic) };
             threads.ForEach(thread => thread.Start());
-            threads.ForEach(thread => thread.Join());
+            Thread.Sleep(2000);
+            //threads.ForEach(thread => thread.Join());
             sw.Stop();
             Console.WriteLine($"The sum is {sum}, the prime numbers are {firstPrimeNumber}, {secondPrimeNumber}, {thirdPrimeNumber}");
             Console.WriteLine($"Prime numbers and the sum found in {sw.ElapsedMilliseconds} milliseconds.");
@@ -58,7 +59,7 @@ namespace Week7
         {
             firstPrimeNumber = PrimesInRangeBasic(0);
             int increment = 0;
-            while (firstPrimeNumber < 100)
+            while (firstPrimeNumber < 100000000)
             {
                 firstPrimeNumber = PrimesInRangeBasic(increment++);
             }
@@ -68,7 +69,7 @@ namespace Week7
         {
             secondPrimeNumber = PrimesInRangeBasic(0);
             int increment = 0;
-            while (secondPrimeNumber < 200)
+            while (secondPrimeNumber < 2000000000)
             {
                 secondPrimeNumber = PrimesInRangeBasic(increment++);
             }
@@ -78,7 +79,7 @@ namespace Week7
         {
             thirdPrimeNumber = PrimesInRangeBasic(0);
             int increment = 0;
-            while (thirdPrimeNumber < 300)
+            while (thirdPrimeNumber < 3000000000000)
             {
                 thirdPrimeNumber = PrimesInRangeBasic(increment++);
             }
